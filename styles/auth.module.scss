@@ -1,0 +1,21 @@
+.loginNavbar {
+  display: flex;
+  align-items: center;
+  .profileInfo {
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(219, 219, 219, 1);
+    p {
+      font-size: 12px;
+      margin: 0 10px 0 5px;
+    }
+  }
+  button {
+    margin-left: 10px;
+  }
+}
