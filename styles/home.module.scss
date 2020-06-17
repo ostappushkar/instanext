@@ -1,0 +1,18 @@
+.container {
+  margin: auto;
+  max-width: 600px;
+  padding-top: 65px;
+  padding-bottom: 56px;
+}
+.loadingError {
+  margin-left: 20px;
+  color: red;
+}
+.pageTitle {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  h1 {
+    display: inline;
+  }
+}

@@ -24,7 +24,11 @@ button {
     transition: 0.3s;
   }
 }
-
+#__next {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 * {
   box-sizing: border-box;
 }
@@ -47,21 +51,10 @@ img {
   max-width: 100%;
   display: block;
 }
-.container {
-  margin: auto;
-  max-width: 600px;
-  padding-top: 60px;
+
+.MuiSkeleton-text {
+  border-radius: 6px;
 }
-.pageTitle {
-  padding-top: 20px;
-  display: flex;
-  align-items: center;
-  h1 {
-    display: inline;
-  }
-  .loader {
-    width: 20px !important;
-    height: 20px !important;
-    color: black;
-  }
+.MuiBottomNavigationAction-root.Mui-selected {
+  color: black !important;
 }

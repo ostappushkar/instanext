@@ -1,8 +1,9 @@
-import { IStoreState } from "../../interfaces";
 import styles from "../../styles/auth.module.scss";
 import { logOut, googleLogin } from "../../services/auth";
 import PersonIcon from "@material-ui/icons/Person";
 import { connect } from "react-redux";
+import ExitToAppSharpIcon from "@material-ui/icons/ExitToAppSharp";
+import { IStoreState } from "../../interfaces/store";
 interface IAuth {
   currentUser: firebase.User;
   isLogged: boolean;
@@ -27,7 +28,9 @@ const Auth = (props: IAuth) => {
           )}
           <p className={styles.navbarUsername}>{currentUser?.displayName}</p>
         </div>
-        <button onClick={handleLogoutClick}>Log out</button>
+        <button onClick={handleLogoutClick}>
+          <ExitToAppSharpIcon />
+        </button>
       </div>
     );
   } else {

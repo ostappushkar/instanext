@@ -1,5 +1,5 @@
 import styles from "../../styles/post.module.scss";
-import { IPostProps } from "../../interfaces";
+import { IPostProps } from ".";
 
 export default (props: IPostProps) => {
   const { item } = props;

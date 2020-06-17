@@ -9,7 +9,9 @@ export const config = {
   messagingSenderId: process.env.REACR_APP_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_ID,
 };
-firebase.initializeApp(config);
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
 export const persistance = firebase.auth.Auth.Persistence.LOCAL;
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 export const authRef = firebase.auth();

@@ -1,6 +1,7 @@
 .navbar {
   position: fixed;
   width: 100%;
+  left: 0;
   display: flex;
   background-color: white;
   justify-content: flex-end;
@@ -9,4 +10,5 @@
   border-bottom: 1px solid rgba(219, 219, 219, 1);
   margin-bottom: 30px;
   height: 65px;
+  z-index: 1;
 }

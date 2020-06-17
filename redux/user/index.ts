@@ -1,5 +1,5 @@
 import actionTypes from "./actionTypes";
-import { ILoginState, IDispathAction } from "../../interfaces";
+import { ILoginState, IDispatchAction } from "../../interfaces/store/";
 
 const loginState: ILoginState = {
   isLogged: false,
@@ -8,7 +8,7 @@ const loginState: ILoginState = {
 
 const loginReducer = (
   state = loginState,
-  action: IDispathAction
+  action: IDispatchAction
 ): ILoginState => {
   switch (action.type) {
     case actionTypes.GET_USER:

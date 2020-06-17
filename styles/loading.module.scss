@@ -15,6 +15,7 @@
     }
     .headerUserName {
       margin: 0 10px;
+      width: 50%;
     }
   }
   .postContent {
@@ -22,23 +23,27 @@
     display: flex;
     justify-content: center;
     border-bottom: 1px solid rgba(219, 219, 219, 1);
+    span {
+      height: 170px;
+      width: 100%;
+    }
   }
   .postFooter {
     padding: 16px;
     .postInfoLikes {
       .postLikes {
         font-weight: 500;
+        width: 20%;
+        height: 16px;
       }
     }
     .postFooterDesc {
-      display: inline;
+      display: flex;
       .postFooterUser {
-        display: inline;
         font-weight: 500;
         margin-right: 5px;
-      }
-      .postDesc {
-        display: inline;
+        width: 60%;
+        height: 20px;
       }
     }
     .postComments {
@@ -47,19 +52,24 @@
       }
       ul {
         margin: 0;
+        padding-inline-start: 0;
         list-style: none;
-        padding-inline-start: 20px;
         li {
-          font-size: 14px;
+          padding: 2px 0;
+          width: 50%;
+          span {
+            height: 14px;
+          }
         }
       }
     }
     .postInfoDate {
       margin-top: 10px;
       p {
-        text-transform: uppercase;
-        color: #8e8e8e;
-        font-size: 12px;
+        max-width: 35%;
+        span {
+          height: 16px;
+        }
       }
     }
   }

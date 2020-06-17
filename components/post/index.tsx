@@ -1,7 +1,11 @@
 import styles from "../../styles/post.module.scss";
 import PostFooter from "./postFooter";
 import PostHeader from "./postHeader";
-import { IPostProps } from "../../interfaces";
+import IPost from "../../interfaces/post";
+export interface IPostProps {
+  item: IPost;
+}
+
 export default (props: IPostProps) => {
   const { item } = props;
   return (

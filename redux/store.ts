@@ -4,7 +4,7 @@ import posts from "./posts";
 import login from "./user";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-import { IStoreState } from "../interfaces";
+import { IStoreState } from "../interfaces/store/";
 
 let store;
 

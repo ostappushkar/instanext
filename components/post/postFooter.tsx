@@ -1,6 +1,7 @@
 import styles from "../../styles/post.module.scss";
 import PostComments from "./postComments";
-import { IPostProps } from "../../interfaces";
+import { IPostProps } from ".";
+
 export default (props: IPostProps) => {
   const { item } = props;
   return (
@@ -9,7 +10,6 @@ export default (props: IPostProps) => {
         <p className={styles.postLikes}>{item.likes} likes</p>
       </div>
       <div className={styles.postFooterDesc}>
-        {" "}
         <p className={styles.postFooterUser}>{item.userName}</p>
         <p className={styles.postDesc}>{item.description}</p>
       </div>
