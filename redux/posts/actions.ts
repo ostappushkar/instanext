@@ -1,35 +1,70 @@
 import action from "../actions";
 import actionTypes from "./actionTypes";
-import Http from "../../services/http";
-import { IPost } from "../../interfaces";
 import { formatDistance } from "date-fns";
+import { postsRef, authRef } from "../../config/firebase";
 export const getPosts = () => (dispatch) => {
   dispatch(action(actionTypes.GET_POSTS_LOADING));
-  Http.get("/api/v1/posts/")
-    .then((response: any) => {
-      let posts: Array<IPost> = [];
-      response.map((item: any) => {
-        let likes: number = Math.round(Math.random() * Math.floor(100));
-        let comments = ["Nice", "Good", "Pretty", "Beautiful"];
-        let date = new Date(item.createdAt);
-        return posts.push({
-          id: item.id,
-          imageUrl: item.imageUrl,
-          likes: likes,
-          userName: item.userName,
-          avatar: item.avatar,
-          description: item.description,
-          comments: comments,
-          createdAt: formatDistance(Date.now(), date, {
+  postsRef.on(
+    "value",
+    (snapshot: firebase.database.DataSnapshot) => {
+      let postsSnap = snapshot.val();
+      let posts = [];
+      for (const post in postsSnap) {
+        posts.unshift({
+          id: post,
+          authorId: postsSnap[post].authorId,
+          imageUrl: postsSnap[post].imageUrl,
+          likes: postsSnap[post].likes,
+          userName: postsSnap[post].userName,
+          avatar: postsSnap[post].avatar,
+          description: postsSnap[post].description,
+          liked: postsSnap[post].liked,
+          comments: postsSnap[post].comments,
+          createdAt: formatDistance(Date.now(), postsSnap[post].createdAt, {
             addSuffix: true,
             includeSeconds: true,
           }),
         });
-      });
+      }
       dispatch(action(actionTypes.GET_POSTS_LOADED, { posts: posts }));
-    })
-    .catch((e) => {
+    },
+    (e) => {
       dispatch(action(actionTypes.LOADING_ERROR, null, { error: e }));
       console.warn(e);
-    });
+    }
+  );
+};
+export const getUserPosts = () => (dispatch) => {
+  dispatch(action(actionTypes.GET_POSTS_LOADING));
+  postsRef.on(
+    "value",
+    (snapshot: firebase.database.DataSnapshot) => {
+      let postsSnap = snapshot.val();
+      let posts = [];
+      for (const post in postsSnap) {
+        if (postsSnap[post].authorId === authRef.currentUser.uid) {
+          posts.unshift({
+            id: post,
+            liked: postsSnap[post].liked,
+            authorId: postsSnap[post].authorId,
+            imageUrl: postsSnap[post].imageUrl,
+            likes: postsSnap[post].likes,
+            userName: postsSnap[post].userName,
+            avatar: postsSnap[post].avatar,
+            description: postsSnap[post].description,
+            comments: postsSnap[post].comments,
+            createdAt: formatDistance(Date.now(), postsSnap[post].createdAt, {
+              addSuffix: true,
+              includeSeconds: true,
+            }),
+          });
+        }
+      }
+      dispatch(action(actionTypes.GET_USER_POSTS_LOADED, { posts: posts }));
+    },
+    (e) => {
+      dispatch(action(actionTypes.LOADING_ERROR, null, { error: e }));
+      console.warn(e);
+    }
+  );
 };

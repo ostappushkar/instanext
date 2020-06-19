@@ -1,12 +1,13 @@
 import Head from "next/head";
-import Navbar from "../components/navbar";
 import Home from "../components/home";
 import { connect } from "react-redux";
 import { getPosts } from "../redux/posts/actions";
 import { useEffect } from "react";
 import { watchAuthState } from "../redux/user/actions";
-import BottomNav from "../components/bottomNavigation";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 
+library.add(fab);
 interface IDashboard {
   getPosts: Function;
   watchAuthState: Function;
@@ -22,7 +23,6 @@ const Dashboard = (props: IDashboard) => {
       <Head>
         <title>Instogram</title>
       </Head>
-      <Navbar />
       <Home />
     </section>
   );
@@ -34,7 +34,6 @@ const mapDispatchToProps = {
 };
 export default connect(null, mapDispatchToProps)(Dashboard);
 export const getStaticProps = () => {
-  getPosts();
   return {
     props: {
       initialReduxState: {
@@ -42,6 +41,10 @@ export const getStaticProps = () => {
           loading: false,
           posts: [],
           error: null,
+          userPosts: [],
+        },
+        login: {
+          userLoading: false,
         },
       },
     },

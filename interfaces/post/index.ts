@@ -7,4 +7,6 @@ export default interface IPost {
   description: string;
   comments: Array<string>;
   createdAt: string;
+  authorId: string;
+  liked: Array<string>;
 }

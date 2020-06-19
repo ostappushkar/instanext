@@ -1,19 +1,29 @@
 import { useState } from "react";
 import { isMobileOnly } from "react-device-detect";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlusSquare,
+  faImages,
+  faHeart,
+  faUser,
+} from "@fortawesome/free-regular-svg-icons";
+import { connect } from "react-redux";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import HomeSharpIcon from "@material-ui/icons/HomeSharp";
-import AddPhotoAlternateSharpIcon from "@material-ui/icons/AddPhotoAlternateSharp";
-import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
-import PersonSharpIcon from "@material-ui/icons/PersonSharp";
 import styles from "../../styles/bottomNav.module.scss";
-const BottomNav = () => {
-  const [value, setValue] = useState("home");
-
+import { IStoreState } from "../../interfaces/store";
+import Router from "next/router";
+interface IBottomNavProps {
+  currentUser: firebase.User;
+  isLogged: boolean;
+}
+const BottomNav = (props: IBottomNavProps) => {
+  const [value, setValue] = useState("/");
+  const { currentUser, isLogged } = props;
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setValue(newValue);
+    Router.push(newValue);
   };
-
   return isMobileOnly ? (
     <BottomNavigation
       className={styles.container}
@@ -23,25 +33,37 @@ const BottomNav = () => {
     >
       <BottomNavigationAction
         className={styles.navItem}
-        value="home"
-        icon={<HomeSharpIcon />}
+        value="/"
+        icon={<FontAwesomeIcon icon={faImages} />}
       />
       <BottomNavigationAction
         className={styles.navItem}
-        value="add"
-        icon={<AddPhotoAlternateSharpIcon />}
+        value="/add"
+        icon={<FontAwesomeIcon icon={faPlusSquare} />}
       />
       <BottomNavigationAction
         className={styles.navItem}
-        value="Likes"
-        icon={<FavoriteSharpIcon />}
+        value="/likes"
+        icon={<FontAwesomeIcon icon={faHeart} />}
       />
       <BottomNavigationAction
         className={styles.navItem}
-        value="profile"
-        icon={<PersonSharpIcon />}
+        value="/profile"
+        icon={
+          isLogged ? (
+            <img className={styles.userPhoto} src={currentUser.photoURL} />
+          ) : (
+            <FontAwesomeIcon icon={faUser} />
+          )
+        }
       />
     </BottomNavigation>
   ) : null;
 };
-export default BottomNav;
+const mapsStateToProps = (state: IStoreState) => {
+  return {
+    currentUser: state.login.currentUser,
+    isLogged: state.login.isLogged,
+  };
+};
+export default connect(mapsStateToProps)(BottomNav);

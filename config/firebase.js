@@ -15,3 +15,5 @@ if (!firebase.apps.length) {
 export const persistance = firebase.auth.Auth.Persistence.LOCAL;
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 export const authRef = firebase.auth();
+export const databaseRef = firebase.database().ref();
+export const postsRef = databaseRef.child("posts");

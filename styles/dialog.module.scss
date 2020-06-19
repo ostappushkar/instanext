@@ -1,0 +1,57 @@
+.dialogLoader {
+  height: 100%;
+}
+.googleButton {
+  font-family: initial !important;
+  width: 100% !important;
+  margin: 20px 0 10px 0;
+}
+.loginButton {
+  padding: 10px 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.inputField {
+  margin-bottom: 10px !important;
+}
+.errorText {
+  color: red;
+  margin-top: 5px;
+}
+.loginSignupToggler {
+  background: none;
+  color: black;
+  border: none;
+  padding: 0;
+  margin-bottom: 5px;
+  &:hover {
+    box-shadow: none;
+  }
+}
+.uploader {
+  display: flex;
+  justify-content: center;
+}
+.loader {
+  color: white !important;
+}
+.imagePreview {
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  justify-content: center;
+  border: 1px solid rgba(219, 219, 219, 1);
+  border-radius: 50%;
+  background-color: ghostwhite;
+  svg {
+    width: 25px !important;
+    height: 25px;
+  }
+}

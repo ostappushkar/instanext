@@ -4,18 +4,26 @@ interface ICommentsProps {
 }
 export default (props: ICommentsProps) => {
   const { comments } = props;
-  return (
-    <div className={styles.postComments}>
-      <p className={styles.commentsLabel}>Comments:</p>
-      <ul>
-        {comments.map((comment: string, index: number) => {
-          return (
-            <li key={index} className={styles.postComment}>
-              {comment}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
+  if (comments?.length) {
+    return (
+      <div className={styles.postComments}>
+        <p className={styles.commentsLabel}>Comments:</p>
+        <ul>
+          {comments.length > 1 ? (
+            comments.map((comment: string, index: number) => {
+              return (
+                <li key={index} className={styles.postComment}>
+                  {comment}
+                </li>
+              );
+            })
+          ) : (
+            <p className={styles.commentsLabel}>no comments</p>
+          )}
+        </ul>
+      </div>
+    );
+  } else {
+    return null;
+  }
 };

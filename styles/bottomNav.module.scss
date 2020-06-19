@@ -7,5 +7,19 @@
   border-top: 1px solid rgba(219, 219, 219, 1);
   .navItem {
     padding: 6px 12px 8px !important;
+    background: none;
+    .userPhoto {
+      width: 32px;
+      height: auto;
+      border: 1px solid rgba(219, 219, 219, 1);
+      border-radius: 50%;
+    }
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+    &:hover {
+      box-shadow: none;
+    }
   }
 }
