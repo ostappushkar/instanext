@@ -21,7 +21,9 @@ export default (props: ICommentsProps) => {
                     <p>{comment.user}</p> {comment.comment}
                   </li>
                 );
-              })
+              }) && visible < comments.length ? (
+              <button className={styles.loadMore}>load more...</button>
+            ) : null
           ) : (
             <p className={styles.commentsLabel}>no comments</p>
           )}

@@ -159,24 +159,8 @@ export const signUp = (
   authRef
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
-      let formData = new FormData();
-      formData.append("image", photo);
-      Http.post("/3/image", formData).then((res) => {
-        authRef.currentUser
-          .updateProfile({
-            displayName: username,
-            photoURL: res.data.link,
-          })
-          .then(() => {
-            dispatch(action(actionTypes.USER_LOADED));
-            successCallback();
-          })
-          .catch((e) => {
-            const { message } = e;
-            dispatch(action(actionTypes.USER_LOADED));
-            errorCallback(message);
-          });
-      });
+      dispatch(action(actionTypes.USER_LOADED));
+      successCallback();
     })
     .catch((e) => {
       const { message, code } = e;
