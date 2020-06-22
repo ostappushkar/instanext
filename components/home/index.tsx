@@ -29,7 +29,6 @@ const Home = (props: IHomeProps) => {
         {isLogged ? (
           <button onClick={handleAddClick} className={styles.addPostButton}>
             Add post <FontAwesomeIcon icon={faPlusSquare} />
-            <AddDialog open={open} setOpen={setOpen} />
           </button>
         ) : null}
       </div>
@@ -41,6 +40,7 @@ const Home = (props: IHomeProps) => {
           return <Post item={post} key={index} />;
         })
       )}
+      <AddDialog open={open} setOpen={setOpen} />
     </main>
   );
 };

@@ -69,7 +69,6 @@ const SignupDialog = (props: ISignupProps) => {
       setErrorMessage("All fields required");
       return;
     } else {
-      console.log(object);
       signUp(
         object.email,
         object.password,

@@ -23,8 +23,8 @@ const AddDialog = (props: IAppProps) => {
   const { open, setOpen, loading, addPost } = props;
   const [errorMessage, setErrorMessage] = useState("");
   const [image, setImage] = useState(null);
-
-  const handleClose = () => {
+  console.log(open);
+  const handleClose = (event, reason) => {
     setOpen(false);
     setErrorMessage("");
   };

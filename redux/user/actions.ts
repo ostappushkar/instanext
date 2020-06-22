@@ -159,8 +159,40 @@ export const signUp = (
   authRef
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
-      dispatch(action(actionTypes.USER_LOADED));
-      successCallback();
+      console.log(photo);
+      if (photo.name) {
+        let formData = new FormData();
+        formData.append("image", photo);
+        Http.post("/3/image", formData).then((res) => {
+          authRef.currentUser
+            .updateProfile({
+              photoURL: res.data.link,
+            })
+            .then(() => {
+              dispatch(action(actionTypes.USER_LOADED));
+              successCallback();
+            })
+            .catch((e) => {
+              const { message } = e;
+              dispatch(action(actionTypes.USER_LOADED));
+              errorCallback(message);
+            });
+        });
+      } else {
+        authRef.currentUser
+          .updateProfile({
+            displayName: username,
+          })
+          .then(() => {
+            dispatch(action(actionTypes.USER_LOADED));
+            successCallback();
+          })
+          .catch((e) => {
+            const { message } = e;
+            dispatch(action(actionTypes.USER_LOADED));
+            errorCallback(message);
+          });
+      }
     })
     .catch((e) => {
       const { message, code } = e;
@@ -189,4 +221,31 @@ export const signUp = (
       dispatch(action(actionTypes.USER_LOADED));
       errorCallback(err);
     });
+};
+
+export const uploadPhoto = (
+  photo: File,
+  successCallback: () => void = () => {},
+  errorCallback: (message: string) => void = () => {}
+) => (dispatch) => {
+  if (photo.name) {
+    dispatch(action(actionTypes.USER_LOADING));
+    let formData = new FormData();
+    formData.append("image", photo);
+    Http.post("/3/image", formData).then((res) => {
+      authRef.currentUser
+        .updateProfile({
+          photoURL: res.data.link,
+        })
+        .then(() => {
+          dispatch(action(actionTypes.USER_LOADED));
+          successCallback();
+        })
+        .catch((e) => {
+          const { message } = e;
+          dispatch(action(actionTypes.USER_LOADED));
+          errorCallback(message);
+        });
+    });
+  }
 };

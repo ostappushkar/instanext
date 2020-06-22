@@ -36,7 +36,9 @@ const Auth = (props: IAuth) => {
                 <img alt="User Avatar" src={currentUser.photoURL} />
               </div>
             ) : (
-              <FontAwesomeIcon icon={faUser} />
+              <div className={styles.userIcon}>
+                <FontAwesomeIcon icon={faUser} />
+              </div>
             )}
             <p className={styles.navbarUsername}>{currentUser?.displayName}</p>
           </div>

@@ -5,18 +5,32 @@ import Post from "../post";
 import Loading from "../loading";
 import styles from "../../styles/profile.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
+import { faLongArrowAltLeft, faUser } from "@fortawesome/free-solid-svg-icons";
 import { IPost } from "../../interfaces/post";
+import { uploadPhoto } from "../../redux/user/actions";
+import { CircularProgress } from "@material-ui/core";
 
 interface IProfileProps {
   currentUser: firebase.User;
   userPosts: IPost[];
   loading: boolean;
+  userLoading: boolean;
+  uploadPhoto: Function;
 }
+
 const Profile = (props: IProfileProps) => {
-  const { currentUser, userPosts, loading } = props;
+  const { currentUser, userPosts, uploadPhoto, userLoading, loading } = props;
   const handleBackClick = () => {
     Router.push("/");
+  };
+  const handleImage = (event) => {
+    console.log(event.target.files);
+    if (event.target.files) {
+      var file = event.target.files[0];
+      uploadPhoto(file, () => {
+        console.log("Photo uploaded");
+      });
+    }
   };
   return (
     <main className={styles.container}>
@@ -31,7 +45,23 @@ const Profile = (props: IProfileProps) => {
           <p>{userPosts.length} posts </p>
         </div>
         <div className={styles.profileAvatar}>
-          <img src={currentUser.photoURL} alt="avatar" />
+          {currentUser.photoURL ? (
+            <img src={currentUser.photoURL} alt="avatar" />
+          ) : userLoading ? (
+            <CircularProgress className={styles.photoLoader} />
+          ) : (
+            <label htmlFor="image-upload">
+              <input
+                name="photo"
+                onChange={handleImage}
+                id="image-upload"
+                hidden
+                type="file"
+                accept="image/*"
+              />
+              <FontAwesomeIcon icon={faUser} />
+            </label>
+          )}
         </div>
       </div>
       <div className={styles.userPosts}>
@@ -49,7 +79,10 @@ const mapsStateToProps = (state: IStoreState) => {
     currentUser: state.login.currentUser,
     userPosts: state.posts.userPosts,
     loading: state.posts.loading,
+    userLoading: state.login.userLoading,
   };
 };
-
-export default connect(mapsStateToProps)(Profile);
+const mapDispatchToProps = {
+  uploadPhoto,
+};
+export default connect(mapsStateToProps, mapDispatchToProps)(Profile);
