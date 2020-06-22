@@ -86,9 +86,15 @@
       ul {
         margin: 0;
         list-style: none;
-        padding-inline-start: 20px;
+        padding-inline-start: 0px;
         li {
           font-size: 14px;
+          display: flex;
+          p {
+            margin-right: 5px;
+            font-size: 14px;
+            font-weight: 500;
+          }
         }
       }
     }
@@ -100,10 +106,37 @@
         font-size: 12px;
       }
     }
+    .addComment {
+      margin-top: 5px;
+      form {
+        display: flex;
+        justify-content: space-between;
+      }
+      width: 100%;
+      .commentField {
+        width: 100%;
+      }
+      textarea {
+        font-size: 14px !important;
+      }
+      button {
+        margin-left: 10px;
+        svg {
+          width: 20px !important;
+          height: 20px;
+        }
+        color: black;
+        background: none;
+      }
+    }
   }
 }
 .dialogButtons {
   padding: 24px !important;
+  button {
+    padding: 7px 20px;
+    border-radius: 20px;
+  }
 }
 .MuiDialog-paper {
   min-width: 300px;

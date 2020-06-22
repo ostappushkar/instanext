@@ -6,7 +6,7 @@ import Loading from "../loading";
 import styles from "../../styles/profile.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
-import IPost from "../../interfaces/post";
+import { IPost } from "../../interfaces/post";
 
 interface IProfileProps {
   currentUser: firebase.User;

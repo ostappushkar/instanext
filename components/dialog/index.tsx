@@ -1,7 +1,5 @@
 import { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
-import { IStoreState } from "../../interfaces/store";
-import { connect } from "react-redux";
 import styles from "../../styles/dialog.module.scss";
 import Login from "./login";
 import Signup from "./signup";

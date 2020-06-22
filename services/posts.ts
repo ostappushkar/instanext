@@ -1,42 +1,6 @@
-import { postsRef, authRef, databaseRef } from "../config/firebase";
-import Http from "./http";
-import IPost from "../interfaces/post";
+import { postsRef, authRef } from "../config/firebase";
+import { IPost } from "../interfaces/post";
 
-export const addPost = (
-  desc: string,
-  photo: File,
-  successCallback: () => void = () => {},
-  errorCallback: (message: string) => void = () => {}
-) => {
-  let formData = new FormData();
-  formData.append("image", photo);
-  Http.post("/3/image", formData)
-    .then((res) => {
-      postsRef
-        .push({
-          authorId: authRef.currentUser.uid,
-          imageUrl: res.data.link,
-          likes: 0,
-          userName: authRef.currentUser.displayName,
-          avatar: authRef.currentUser.photoURL,
-          description: desc,
-          comments: [""],
-          liked: [""],
-          createdAt: Date.now(),
-        })
-        .then(() => {
-          successCallback();
-        })
-        .catch((e) => {
-          const { message } = e;
-          errorCallback(message);
-        });
-    })
-    .catch((e) => {
-      const { message } = e;
-      errorCallback(message);
-    });
-};
 export const deletePost = (
   post: IPost,
   successCallback: () => void = () => {},
@@ -66,7 +30,6 @@ export const setLike = (
       .child(post.id)
       .once("value")
       .then((snapshot: firebase.database.DataSnapshot) => {
-        console.log(snapshot.val());
         let likedArr: string[] = snapshot.val().liked;
         if (likedArr.includes(authRef.currentUser.uid)) {
           let index = likedArr.indexOf(authRef.currentUser.uid);
@@ -77,6 +40,36 @@ export const setLike = (
           console.log("liked");
         }
         postsRef.child(post.id).update({ liked: likedArr }, (e) => {
+          if (e) {
+            console.warn(e);
+          }
+        });
+        successCallback();
+      })
+      .catch((e) => {
+        console.warn(e);
+      });
+  } else {
+    errorCallback("Not logged in");
+  }
+};
+export const addComment = (
+  post: IPost,
+  comment: string,
+  successCallback: () => void = () => {},
+  errorCallback: (message: string) => void = () => {}
+) => {
+  if (authRef.currentUser) {
+    postsRef
+      .child(post.id)
+      .once("value")
+      .then((snapshot: firebase.database.DataSnapshot) => {
+        let commentsArr = snapshot.val().comments;
+        commentsArr.push({
+          user: authRef.currentUser.displayName,
+          comment: comment,
+        });
+        postsRef.child(post.id).update({ comments: commentsArr }, (e) => {
           if (e) {
             console.warn(e);
           }

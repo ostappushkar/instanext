@@ -5,17 +5,22 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/addPost.module.scss";
-import { addPost } from "../../services/posts";
+import { addPost } from "../../redux/posts/actions";
+import { IStoreState } from "../../interfaces/store";
+import { connect } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
 interface IAppProps {
   open: boolean;
   setOpen: Function;
+  loading: boolean;
+  addPost: Function;
 }
 interface IPostData {
   desc: string;
   photo: File;
 }
 const AddDialog = (props: IAppProps) => {
-  const { open, setOpen } = props;
+  const { open, setOpen, loading, addPost } = props;
   const [errorMessage, setErrorMessage] = useState("");
   const [image, setImage] = useState(null);
 
@@ -43,6 +48,7 @@ const AddDialog = (props: IAppProps) => {
     data.forEach((value, key) => {
       object[key] = value;
     });
+
     if (object.photo === null) {
       setErrorMessage("Choose a photo");
       return;
@@ -92,11 +98,24 @@ const AddDialog = (props: IAppProps) => {
           />
           <p className={styles.errorText}>{errorMessage}</p>
           <button type="submit" className={styles.confirmButton}>
-            Confirm
+            {loading ? (
+              <CircularProgress className={styles.loader} />
+            ) : (
+              "Confirm"
+            )}
           </button>
         </form>
       </DialogContent>
     </Dialog>
   );
 };
-export default AddDialog;
+
+const mapsStateToProps = (state: IStoreState) => {
+  return {
+    loading: state.posts.addLoading,
+  };
+};
+const mapDispatchToProps = {
+  addPost,
+};
+export default connect(mapsStateToProps, mapDispatchToProps)(AddDialog);

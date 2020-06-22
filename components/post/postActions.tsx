@@ -66,10 +66,8 @@ const PostActions = (props: IPostActionsProps) => {
           <DialogContentText>Confirm post delete</DialogContentText>
         </DialogContent>
         <DialogActions className={styles.dialogButtons}>
-          <button onClick={handleClose} color="primary">
-            Close
-          </button>
-          <button onClick={handleDelete} color="primary" autoFocus>
+          <button onClick={handleClose}>Close</button>
+          <button onClick={handleDelete} autoFocus>
             Agree
           </button>
         </DialogActions>

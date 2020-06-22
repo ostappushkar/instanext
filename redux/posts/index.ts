@@ -6,6 +6,7 @@ export const postsState: IPostState = {
   posts: [],
   error: null,
   userPosts: [],
+  addLoading: false,
 };
 
 const reducer = (state = postsState, action: IDispatchAction) => {
@@ -19,6 +20,12 @@ const reducer = (state = postsState, action: IDispatchAction) => {
       return { ...state, loading: false, posts: action.payload.data.posts };
     case actionTypes.GET_USER_POSTS_LOADED:
       return { ...state, loading: false, userPosts: action.payload.data.posts };
+    case actionTypes.LOADING_ERROR:
+      return { ...state, loading: false, error: action.payload.error.error };
+    case actionTypes.ADD_POST_LOADING:
+      return { ...state, addLoading: true };
+    case actionTypes.POST_ADDED:
+      return { ...state, addLoading: false };
     case actionTypes.LOADING_ERROR:
       return { ...state, loading: false, error: action.payload.error.error };
     default:

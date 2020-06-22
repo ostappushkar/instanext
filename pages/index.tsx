@@ -4,10 +4,7 @@ import { connect } from "react-redux";
 import { getPosts } from "../redux/posts/actions";
 import { useEffect } from "react";
 import { watchAuthState } from "../redux/user/actions";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
 
-library.add(fab);
 interface IDashboard {
   getPosts: Function;
   watchAuthState: Function;
@@ -42,6 +39,7 @@ export const getStaticProps = () => {
           posts: [],
           error: null,
           userPosts: [],
+          addLoading: false,
         },
         login: {
           userLoading: false,

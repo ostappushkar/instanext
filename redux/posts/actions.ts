@@ -2,6 +2,7 @@ import action from "../actions";
 import actionTypes from "./actionTypes";
 import { formatDistance } from "date-fns";
 import { postsRef, authRef } from "../../config/firebase";
+import Http from "../../services/http";
 export const getPosts = () => (dispatch) => {
   dispatch(action(actionTypes.GET_POSTS_LOADING));
   postsRef.on(
@@ -67,4 +68,43 @@ export const getUserPosts = () => (dispatch) => {
       console.warn(e);
     }
   );
+};
+export const addPost = (
+  desc: string,
+  photo: File,
+  successCallback: () => void = () => {},
+  errorCallback: (message: string) => void = () => {}
+) => (dispatch) => {
+  dispatch(action(actionTypes.ADD_POST_LOADING));
+  let formData = new FormData();
+  formData.append("image", photo);
+  Http.post("/3/image", formData)
+    .then((res) => {
+      postsRef
+        .push({
+          authorId: authRef.currentUser.uid,
+          imageUrl: res.data.link,
+          likes: 0,
+          userName: authRef.currentUser.displayName,
+          avatar: authRef.currentUser.photoURL,
+          description: desc,
+          comments: [""],
+          liked: [""],
+          createdAt: Date.now(),
+        })
+        .then(() => {
+          dispatch(action(actionTypes.POST_ADDED));
+          successCallback();
+        })
+        .catch((e) => {
+          const { message } = e;
+          dispatch(action(actionTypes.POST_ADDED));
+          errorCallback(message);
+        });
+    })
+    .catch((e) => {
+      const { message } = e;
+      dispatch(action(actionTypes.POST_ADDED));
+      errorCallback(message);
+    });
 };

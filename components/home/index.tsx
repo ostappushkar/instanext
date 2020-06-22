@@ -4,7 +4,7 @@ import Post from "../post";
 import styles from "../../styles/home.module.scss";
 import Loading from "../loading";
 import { IStoreState } from "../../interfaces/store/";
-import IPost from "../../interfaces/post/";
+import { IPost } from "../../interfaces/post/";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 import AddDialog from "../addPost";
