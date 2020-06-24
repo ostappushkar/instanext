@@ -1,0 +1,13 @@
+.snackbar{
+    color:black !important;
+    cursor: pointer;
+    .snackbarAlert{
+        color:black !important;
+        font-weight: 400;
+        background-color: white;
+        border-radius: 50px;
+        button{
+            background: none;
+        }
+    }
+}

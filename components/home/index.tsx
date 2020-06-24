@@ -8,14 +8,16 @@ import { IPost } from "../../interfaces/post/";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 import AddDialog from "../addPost";
+import Alert from "../snackbar"
 interface IHomeProps {
   loading: boolean;
   posts: IPost[];
   error: any;
   isLogged: boolean;
+  newPostsAvailable:boolean
 }
 const Home = (props: IHomeProps) => {
-  const { loading, posts, error, isLogged } = props;
+  const { loading, posts, error, isLogged,newPostsAvailable } = props;
   const [open, setOpen] = useState(false);
   const handleAddClick = () => {
     setOpen(true);
@@ -24,7 +26,7 @@ const Home = (props: IHomeProps) => {
     <main className={styles.container}>
       <div className={styles.pageTitle}>
         <h1>
-          Posts<span>.</span>
+          Posts .
         </h1>
         {isLogged ? (
           <button onClick={handleAddClick} className={styles.addPostButton}>
@@ -40,6 +42,7 @@ const Home = (props: IHomeProps) => {
           return <Post item={post} key={index} />;
         })
       )}
+      <Alert alertOpen={newPostsAvailable} message="New Posts"/>
       <AddDialog open={open} setOpen={setOpen} />
     </main>
   );
@@ -50,6 +53,7 @@ const mapsStateToProps = (state: IStoreState) => {
     posts: state.posts.posts,
     error: state.posts.error,
     isLogged: state.login.isLogged,
+    newPostsAvailable:state.posts.newPostsAvailable
   };
 };
 export default connect(mapsStateToProps)(Home);
