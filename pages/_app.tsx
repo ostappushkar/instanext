@@ -1,11 +1,11 @@
-import "../styles/global.scss";
+import '../styles/global.scss'
 
-import { Provider } from "react-redux";
-import { useStore } from "../redux/store";
-import Layout from "../components/layout";
+import { Provider } from 'react-redux'
+import { useStore } from '../redux/store'
+import Layout from '../components/layout'
 
 export default function App({ Component, pageProps }) {
-  const store = useStore(pageProps.initialReduxState);
+  const store = useStore(pageProps.initialReduxState)
 
   return (
     <Provider store={store}>
@@ -13,5 +13,5 @@ export default function App({ Component, pageProps }) {
         <Component {...pageProps} />
       </Layout>
     </Provider>
-  );
+  )
 }

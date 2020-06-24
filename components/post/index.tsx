@@ -1,7 +1,7 @@
 import styles from "../../styles/post.module.scss";
 import PostFooter from "./postFooter";
 import PostHeader from "./postHeader";
-import IPost from "../../interfaces/post";
+import {IPost} from "../../interfaces/post";
 export interface IPostProps {
   item: IPost;
 }

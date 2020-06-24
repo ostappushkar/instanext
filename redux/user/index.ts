@@ -30,9 +30,8 @@ const loginReducer = (
         userLoading: false,
       };
     default:
-      return {
-        ...state,
-      };
+      return state
+
   }
 };
 export default loginReducer;

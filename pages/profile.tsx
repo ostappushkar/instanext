@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Router from "next/router";
 import MyProfile from "../components/profile";
 import { connect } from "react-redux";
 import { IStoreState } from "../interfaces/store";
@@ -23,8 +22,6 @@ const Profile = (props: IProfileProps) => {
         <MyProfile />
       </section>
     );
-  } else {
-    Router.push("/");
   }
 };
 const mapsStateToProps = (state: IStoreState) => {

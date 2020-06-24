@@ -1,20 +1,22 @@
 import Head from "next/head";
 import Home from "../components/home";
 import { connect } from "react-redux";
-import { getPosts } from "../redux/posts/actions";
+import { getPosts, postsWatcher } from "../redux/posts/actions";
 import { useEffect } from "react";
 import { watchAuthState } from "../redux/user/actions";
 
 interface IDashboard {
   getPosts: Function;
   watchAuthState: Function;
+  postsWatcher:Function
 }
 const Dashboard = (props: IDashboard) => {
-  const { getPosts, watchAuthState } = props;
+  const { getPosts, watchAuthState,postsWatcher } = props;
   useEffect(() => {
     watchAuthState();
     getPosts();
-  }, [getPosts, watchAuthState]);
+    postsWatcher();
+  }, [getPosts, watchAuthState,postsWatcher]);
   return (
     <section>
       <Head>
@@ -28,6 +30,7 @@ const Dashboard = (props: IDashboard) => {
 const mapDispatchToProps = {
   getPosts,
   watchAuthState,
+  postsWatcher
 };
 export default connect(null, mapDispatchToProps)(Dashboard);
 export const getStaticProps = () => {
@@ -40,6 +43,7 @@ export const getStaticProps = () => {
           error: null,
           userPosts: [],
           addLoading: false,
+          newPostsAvailable:false
         },
         login: {
           userLoading: false,
