@@ -89,11 +89,20 @@
         padding-inline-start: 0px;
         li {
           font-size: 14px;
+          word-break: break-all;
           display: flex;
+          justify-content: space-between;
           p {
             margin-right: 5px;
             font-size: 14px;
             font-weight: 500;
+          }
+          .commentDate{
+            margin-left: 5px;
+            display: inline;
+            white-space: nowrap;
+            color: #8e8e8e;
+            font-weight: 300;
           }
         }
       }

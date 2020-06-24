@@ -1,3 +1,5 @@
+import { IComment } from ".";
+
 export default interface IPost {
   id: string;
   imageUrl: string;
@@ -5,7 +7,7 @@ export default interface IPost {
   userName: string;
   avatar: string;
   description: string;
-  comments: Array<string>;
+  comments: Array<IComment>;
   createdAt: string;
   authorId: string;
   liked: Array<string>;

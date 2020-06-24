@@ -68,6 +68,7 @@ export const addComment = (
         commentsArr.push({
           user: authRef.currentUser.displayName,
           comment: comment,
+          date:Date.now()
         });
         postsRef.child(post.id).update({ comments: commentsArr }, (e) => {
           if (e) {
