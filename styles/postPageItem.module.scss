@@ -1,0 +1,168 @@
+.post {
+  background-color: white;
+  border: 1px solid rgba(219, 219, 219, 1);
+  border-radius: 3px;
+  display: flex;
+  margin: 20px;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+  .postHeader {
+    border-bottom: 1px solid rgba(219, 219, 219, 1);
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    .postInfoHeader {
+      margin-left: 10px;
+      .headerUserName {
+        margin: 0;
+      }
+      p {
+        text-transform: uppercase;
+        color: #8e8e8e;
+        font-size: 12px;
+      }
+    }
+    .headerAvatar {
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+    }
+  }
+  .postText {
+    width: 40%;
+  }
+  .postContent {
+    width: 60%;
+    background-color: ghostwhite;
+    display: flex;
+    justify-content: center;
+    border-right: 1px solid rgba(219, 219, 219, 1);
+  }
+  .postFooter {
+    padding: 10px 16px 16px;
+    .postActions {
+      .likesWrapper {
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+        .postLikes {
+          margin-left: -10px;
+          color: red;
+          font-weight: 500;
+        }
+      }
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .likeIcon {
+        color: red;
+      }
+      .actionButton {
+        margin-right: 15px;
+        padding: 8px 0 8px;
+        background: none;
+        border: none;
+        color: black;
+        &:hover {
+          box-shadow: none;
+        }
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+      .deleteButton {
+        margin-left: 15px;
+        padding: 8px;
+        border-radius: 50%;
+        background: none;
+        border: 1px solid rgba(219, 219, 219, 1);
+        color: black;
+        &:hover {
+          box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+
+    .postFooterDesc {
+      display: inline;
+      .postFooterUser {
+        display: inline;
+        font-weight: 500;
+        margin-right: 5px;
+      }
+      .postDesc {
+        display: inline;
+      }
+    }
+    .postComments {
+      .loadMore {
+        background: none;
+        color: #8e8e8e;
+      }
+      .commentsLabel {
+        color: #8e8e8e;
+      }
+      ul {
+        margin: 0;
+        list-style: none;
+        padding-inline-start: 0px;
+        li {
+          font-size: 14px;
+          word-break: break-all;
+          display: flex;
+          justify-content: space-between;
+          p {
+            margin-right: 5px;
+            font-size: 14px;
+            font-weight: 500;
+          }
+          .commentDate {
+            margin-left: 5px;
+            display: inline;
+            white-space: nowrap;
+            color: #8e8e8e;
+            font-weight: 300;
+          }
+        }
+      }
+    }
+
+    .addComment {
+      margin-top: 5px;
+      form {
+        display: flex;
+        justify-content: space-between;
+      }
+      width: 100%;
+      .commentField {
+        width: 100%;
+      }
+      textarea {
+        font-size: 14px !important;
+      }
+      button {
+        margin-left: 10px;
+        svg {
+          width: 20px !important;
+          height: 20px;
+        }
+        color: black;
+        background: none;
+      }
+    }
+  }
+}
+.dialogButtons {
+  padding: 24px !important;
+  button {
+    padding: 7px 20px;
+    border-radius: 20px;
+  }
+}
+.MuiDialog-paper {
+  min-width: 300px;
+}

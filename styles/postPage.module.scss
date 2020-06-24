@@ -1,0 +1,17 @@
+.container {
+  margin: auto;
+  max-width: 800px;
+  padding-top: 65px;
+  padding-bottom: 56px;
+  .backButton {
+    border: 1px solid rgba(219, 219, 219, 1);
+    margin: 20px 0 0 20px;
+    background: white !important;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 20px;
+    svg {
+      margin-right: 5px;
+    }
+  }
+}
