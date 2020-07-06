@@ -19,7 +19,7 @@ interface IPostPageProps {
 const PostPage = (props: IPostPageProps) => {
   const { post, getCurrentPost, loading, id } = props
   const handleBackClick = () => {
-    Router.push('/')
+    Router.push('/', undefined, { shallow: true })
   }
   useEffect(() => {
     getCurrentPost(id)
@@ -27,11 +27,11 @@ const PostPage = (props: IPostPageProps) => {
   return (
     <section>
       <Head>
-        <title>Post - Instogram</title>
+        <title>{post?.userName ? `${post?.userName}'s post - Instogram` : 'Post - Instogram'}</title>
       </Head>
       <main className={styles.container}>
         {loading ? (
-          <CircularProgress />
+          <CircularProgress className={styles.loader} />
         ) : post ? (
           <>
             <button onClick={handleBackClick} className={styles.backButton}>
