@@ -3,12 +3,19 @@
   max-width: 800px;
   padding-top: 65px;
   padding-bottom: 56px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .loader {
+    margin: auto;
+  }
   .backButton {
     border: 1px solid rgba(219, 219, 219, 1);
     margin: 20px 0 0 20px;
     background: white !important;
     color: black;
     padding: 10px 20px;
+    max-width: 135px;
     border-radius: 20px;
     svg {
       margin-right: 5px;

@@ -39,7 +39,8 @@
     position: absolute;
     top: 20px;
     left: 20px;
-    width: 110px;
+    width: 135px;
+    white-space: nowrap;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,6 +73,10 @@
       padding: 50px;
       cursor: pointer;
     }
+    img {
+      min-height: 250px;
+      min-width: 250px;
+    }
     .photoLoader {
       svg {
         width: 40px !important;
@@ -80,5 +85,42 @@
         padding: 0 !important;
       }
     }
+  }
+}
+@media (max-width: 560px) {
+  .profileInfo {
+    flex-direction: column-reverse;
+    justify-content: center;
+    p {
+      margin-top: 15px;
+    }
+    .userText {
+      margin-right: 25px;
+    }
+    .profileAvatar {
+      height: 175px;
+      width: 175px;
+      margin-bottom: 20px;
+      img {
+        min-height: 175px;
+        min-width: 175px;
+      }
+
+      svg {
+        padding: 0;
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+
+  .profileText {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+@media (max-width: 560px) {
+  .post {
+    border: none;
   }
 }

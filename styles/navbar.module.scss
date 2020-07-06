@@ -4,13 +4,13 @@
   left: 0;
   display: flex;
   background-color: white;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding: 16px;
   border-bottom: 1px solid rgba(219, 219, 219, 1);
   margin-bottom: 30px;
   height: 65px;
-  z-index: 1;
+  z-index: 4;
 }
 .loginNavbar {
   display: flex;
@@ -31,6 +31,10 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      img {
+        min-height: 32px;
+        min-width: 32px;
+      }
     }
     display: flex;
     align-items: center;
