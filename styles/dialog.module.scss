@@ -10,6 +10,7 @@
   align-items: center;
   margin-top: 20px;
   justify-content: center;
+  height: 50px;
   margin-bottom: 8px;
 }
 .inputField {
@@ -33,6 +34,24 @@
   display: flex;
   justify-content: center;
 }
+.closeButton {
+  display: none;
+  background: none;
+  color: black;
+  position: absolute;
+  padding: 0;
+  top: 20px;
+  right: 20px;
+  width: 15px;
+  height: 15px;
+  &:hover {
+    box-shadow: none;
+  }
+  img {
+    width: 15px;
+    height: 15px;
+  }
+}
 .loader {
   color: white !important;
 }
@@ -50,5 +69,10 @@
   svg {
     width: 25px !important;
     height: 25px;
+  }
+}
+@media (max-width: 500px) {
+  .closeButton {
+    display: block;
   }
 }
