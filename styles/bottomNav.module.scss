@@ -1,4 +1,5 @@
 .container {
+  z-index: 9999 !important;
   margin: auto;
   max-width: 600px;
   width: 100%;
@@ -8,11 +9,24 @@
   .navItem {
     padding: 6px 12px 8px !important;
     background: none;
-    .userPhoto {
+    .navAvatar {
       width: 32px;
-      height: auto;
-      border: 1px solid rgba(219, 219, 219, 1);
+      height: 32px;
       border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(219, 219, 219, 1);
+    }
+    .userPhoto {
+      min-height: 32px;
+      min-width: 32px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: auto;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
     }
     svg {
       width: 25px;
