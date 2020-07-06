@@ -8,7 +8,6 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { addComment } from '../../redux/posts/actions'
 import { IStoreState } from '../../interfaces/store'
 import { connect } from 'react-redux'
-import { useRef } from 'react'
 interface IPostFooterProps extends IPostProps {
   isLogged: boolean
   addComment: Function
@@ -44,7 +43,6 @@ const PostFooter = (props: IPostFooterProps) => {
         <div className={styles.addComment}>
           <form onSubmit={handleAddComment}>
             <TextField
-              onKeyDown={handleKeySubmit}
               name="comment"
               rowsMax={4}
               placeholder="Add comment..."
