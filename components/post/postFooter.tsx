@@ -5,14 +5,16 @@ import { IPostProps } from '.'
 import { TextField } from '@material-ui/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
-import { addComment } from '../../services/posts'
+import { addComment } from '../../redux/posts/actions'
 import { IStoreState } from '../../interfaces/store'
 import { connect } from 'react-redux'
+import { useRef } from 'react'
 interface IPostFooterProps extends IPostProps {
   isLogged: boolean
+  addComment: Function
 }
 const PostFooter = (props: IPostFooterProps) => {
-  const { item, isLogged } = props
+  const { item, isLogged, addComment } = props
   const handleAddComment = (event) => {
     event.preventDefault()
     let data = new FormData(event.target)
@@ -21,7 +23,7 @@ const PostFooter = (props: IPostFooterProps) => {
       object[key] = value
     })
     if (object.comment) {
-      addComment(item, object.comment, () => {
+      addComment(item.id, object.comment, () => {
         console.log('Commented')
       })
       event.target.reset()
@@ -30,9 +32,6 @@ const PostFooter = (props: IPostFooterProps) => {
   return (
     <div className={styles.postFooter}>
       <PostActions item={item} />
-      <div className={styles.postInfoLikes}>
-        <p className={styles.postLikes}>{item.liked.length - 1} likes</p>
-      </div>
       <div className={styles.postFooterDesc}>
         <p className={styles.postFooterUser}>{item.userName}</p>
         <p className={styles.postDesc}>{item.description}</p>
@@ -45,6 +44,7 @@ const PostFooter = (props: IPostFooterProps) => {
         <div className={styles.addComment}>
           <form onSubmit={handleAddComment}>
             <TextField
+              onKeyDown={handleKeySubmit}
               name="comment"
               rowsMax={4}
               placeholder="Add comment..."
@@ -65,5 +65,5 @@ const mapsStateToProps = (state: IStoreState) => {
     isLogged: state.login.isLogged,
   }
 }
-
-export default connect(mapsStateToProps)(PostFooter)
+const mapDispatchToProps = { addComment }
+export default connect(mapsStateToProps, mapDispatchToProps)(PostFooter)

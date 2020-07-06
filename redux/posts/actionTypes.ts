@@ -7,5 +7,8 @@ enum postsActionTypes {
   POST_ADDED = 'postAdded',
   NEW_POSTS_AVAILABLE = 'newPostsAvailable',
   GET_CURRENT_POST = 'getCurrentPost',
+  SET_LIKE = 'setLike',
+  ADD_COMMENT = 'addComment',
+  DELETE_POST = 'deletePost',
 }
 export default postsActionTypes

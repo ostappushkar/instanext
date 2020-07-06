@@ -25,8 +25,8 @@ export default (props: IPostProps) => {
             <p className={styles.commentsLabel}>no comments</p>
           )}
           {comments.length > 4 ? (
-            <Link href={'/post/' + item.id}>
-              <a>all comments ({comments.length - 1}) </a>
+            <Link href={'/post/[id]?id=' + item.id} as={'/post/' + item.id}>
+              <a className={styles.allCommentsLink}>all comments ({comments.length - 1}) </a>
             </Link>
           ) : null}
         </ul>

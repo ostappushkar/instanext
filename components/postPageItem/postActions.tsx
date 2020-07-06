@@ -3,16 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as Liked } from '@fortawesome/free-solid-svg-icons'
 import { faHeart, faComment, faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { IPostProps } from '.'
-import { setLike } from '../../services/posts'
+import { setLike } from '../../redux/posts/actions'
 import { connect } from 'react-redux'
 import { IStoreState } from '../../interfaces/store'
 interface IPostActionsProps extends IPostProps {
   currentUser: firebase.User
+  setLike: Function
 }
 const PostActions = (props: IPostActionsProps) => {
-  const { item, currentUser } = props
+  const { item, currentUser, setLike } = props
   const handleLike = () => {
-    setLike(item)
+    console.log(item)
+    setLike(item.id)
   }
   return (
     <div className={styles.postActions}>
@@ -41,5 +43,7 @@ const mapsStateToProps = (state: IStoreState) => {
     currentUser: state.login.currentUser,
   }
 }
-
-export default connect(mapsStateToProps)(PostActions)
+const mapDispatchToProps = {
+  setLike,
+}
+export default connect(mapsStateToProps, mapDispatchToProps)(PostActions)
