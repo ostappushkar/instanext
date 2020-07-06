@@ -5,7 +5,7 @@ import { IPostProps } from '.'
 import { TextField } from '@material-ui/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
-import { addComment } from '../../services/posts'
+import { addComment } from '../../redux/posts/actions'
 import { IStoreState } from '../../interfaces/store'
 import { connect } from 'react-redux'
 interface IPostFooterProps extends IPostProps {
@@ -21,7 +21,7 @@ const PostFooter = (props: IPostFooterProps) => {
       object[key] = value
     })
     if (object.comment) {
-      addComment(item, object.comment, () => {
+      addComment(item.id, object.comment, () => {
         console.log('Commented')
       })
       event.target.reset()
@@ -29,8 +29,6 @@ const PostFooter = (props: IPostFooterProps) => {
   }
   return (
     <div className={styles.postFooter}>
-      <PostActions item={item} />
-
       <div className={styles.postFooterDesc}>
         <p className={styles.postFooterUser}>{item.userName}</p>
         <p className={styles.postDesc}>{item.description}</p>
