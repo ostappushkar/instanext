@@ -1,18 +1,24 @@
-import Head from "next/head";
-import MyProfile from "../components/profile";
-import { connect } from "react-redux";
-import { IStoreState } from "../interfaces/store";
-import { getUserPosts } from "../redux/posts/actions";
-import { useEffect } from "react";
+import Head from 'next/head'
+import MyProfile from '../components/profile'
+import { connect } from 'react-redux'
+import { IStoreState } from '../interfaces/store'
+import { getUserPosts } from '../redux/posts/actions'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 interface IProfileProps {
-  isLogged: boolean;
-  getUserPosts: Function;
+  isLogged: boolean
+  getUserPosts: Function
 }
 const Profile = (props: IProfileProps) => {
-  const { isLogged, getUserPosts } = props;
+  const router = useRouter()
+  const { isLogged, getUserPosts } = props
   useEffect(() => {
-    getUserPosts();
-  }, [getUserPosts]);
+    if (!isLogged) {
+      router.push('/')
+    } else {
+      getUserPosts()
+    }
+  }, [isLogged, getUserPosts])
   if (isLogged) {
     return (
       <section>
@@ -21,16 +27,18 @@ const Profile = (props: IProfileProps) => {
         </Head>
         <MyProfile />
       </section>
-    );
+    )
+  } else {
+    return null
   }
-};
+}
 const mapsStateToProps = (state: IStoreState) => {
   return {
     isLogged: state.login.isLogged,
     userPosts: state.posts.userPosts,
-  };
-};
+  }
+}
 const mapDispatchToProps = {
   getUserPosts,
-};
-export default connect(mapsStateToProps, mapDispatchToProps)(Profile);
+}
+export default connect(mapsStateToProps, mapDispatchToProps)(Profile)
